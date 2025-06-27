@@ -43,6 +43,7 @@
         }
         section {
             padding: 2rem 0;
+            border-bottom: 1px solid #eee;
         }
         footer {
             background-color: #2c3e50;
@@ -53,31 +54,32 @@
         }
 
         /* حاسبة الخرسانة */
-        .calculator {
+        .calculator, .library, .courses, .contact-form {
             background-color: white;
             border-radius: 8px;
             padding: 20px;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            max-width: 500px;
-            margin: 0 auto;
+            max-width: 800px;
+            margin: 20px auto;
         }
-        .calculator h2 {
+        h2 {
             color: #2c3e50;
             border-bottom: 2px solid #3498db;
             padding-bottom: 10px;
         }
-        .calculator label {
+        label {
             display: block;
             margin: 15px 0 5px;
             font-weight: bold;
         }
-        .calculator input {
+        input, textarea {
             width: 100%;
             padding: 8px;
             border: 1px solid #ddd;
             border-radius: 4px;
+            margin-bottom: 10px;
         }
-        .calculator button {
+        button {
             background-color: #3498db;
             color: white;
             border: none;
@@ -87,7 +89,7 @@
             cursor: pointer;
             font-weight: bold;
         }
-        .calculator button:hover {
+        button:hover {
             background-color: #2980b9;
         }
         #result {
@@ -97,26 +99,33 @@
             color: #e74c3c;
         }
 
-        /* المقالات */
-        .articles {
+        /* المكتبة والدورات */
+        .articles, .course-cards {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
             gap: 20px;
         }
-        .article-card {
-            background-color: white;
+        .article-card, .course-card {
+            background-color: #f9f9f9;
             border-radius: 8px;
             padding: 15px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
         }
-        .article-card h3 {
+        .article-card h3, .course-card h3 {
             color: #2c3e50;
             margin-top: 0;
         }
-        .article-card a {
+        .article-card a, .course-card a {
             color: #3498db;
             text-decoration: none;
             font-weight: bold;
+        }
+        .course-details {
+            display: none;
+            padding: 10px;
+            background-color: #eee;
+            margin-top: 10px;
+            border-radius: 4px;
         }
 
         /* التجاوب مع الشاشات الصغيرة */
@@ -127,6 +136,9 @@
             }
             nav ul li {
                 margin: 5px 0;
+            }
+            .articles, .course-cards {
+                grid-template-columns: 1fr;
             }
         }
     </style>
@@ -144,29 +156,18 @@
     <nav>
         <div class="container">
             <ul>
-                <li><a href="#">الرئيسية</a></li>
-                <li><a href="#">المكتبة العلمية</a></li<section class="library">
-  <h2>📚 المكتبة العلمية</h2>
-  <div class="articles">
-    <article>
-      <h3>دليل ACI 318 بالعربية</h3>
-      <p>تحميل ملف PDF لمواصفات الخرسانة المسلحة</p>
-      <a href="path/to/ACI.pdf" download>تنزيل الملف</a>
-    </article>
-    <!-- كرر المقال لكل وثيقة -->
-  </div>
-</section>
-                <li><a href="#">الأدوات</a></li>
-                <li><a href="#">الدورات</a></li>
-                <li><a href="#">اتصل بنا</a></li>
+                <li><a href="#home">الرئيسية</a></li>
+                <li><a href="#library">المكتبة العلمية</a></li>
+                <li><a href="#courses">الدورات</a></li>
+                <li><a href="#contact">اتصل بنا</a></li>
             </ul>
         </div>
     </nav>
 
     <!-- المحتوى الرئيسي -->
     <div class="container">
-        <!-- قسم الحاسبة -->
-        <section>
+        <!-- الصفحة الرئيسية -->
+        <section id="home">
             <div class="calculator">
                 <h2>حاسبة كميات الخرسانة</h2>
                 <label for="length">الطول (متر):</label>
@@ -183,25 +184,68 @@
             </div>
         </section>
 
-        <!-- أحدث المقالات -->
-        <section>
-            <h2>أحدث المقالات</h2>
-            <div class="articles">
-                <div class="article-card">
-                    <h3>تصميم الخلطات الخرسانية وفقًا لـ ACI</h3>
-                    <p>دليل عملي لتصميم خلطة خرسانية متوافقة مع مواصفات المعهد الأمريكي للخرسانة.</p>
-                    <a href="#">اقرأ المزيد →</a>
+        <!-- المكتبة العلمية -->
+        <section id="library">
+            <div class="library">
+                <h2>📚 المكتبة العلمية</h2>
+                <div class="articles">
+                    <div class="article-card">
+                        <h3>دليل ACI 318 بالعربية</h3>
+                        <p>مواصفات الخرسانة المسلحة وفق المعهد الأمريكي للخرسانة</p>
+                        <a href="#" download>تنزيل الملف</a>
+                    </div>
+                    <div class="article-card">
+                        <h3>كتاب تصميم المنشآت الخرسانية</h3>
+                        <p>أساسيات التصميم الإنشائي وفق الكود المصري</p>
+                        <a href="#" download>تنزيل الملف</a>
+                    </div>
                 </div>
-                <div class="article-card">
-                    <h3>أخطاء شائعة في صب الخرسانة</h3>
-                    <p>تعرف على أكثر الأخطاء انتشارًا وكيفية تجنبها لضمان جودة التنفيذ.</p>
-                    <a href="#">اقرأ المزيد →</a>
+            </div>
+        </section>
+
+        <!-- الدورات التدريبية -->
+        <section id="courses">
+            <div class="courses">
+                <h2>🎓 الدورات التدريبية</h2>
+                <div class="course-cards">
+                    <div class="course-card">
+                        <h3>ضبط جودة الخرسانة</h3>
+                        <button onclick="toggleCourse('quality')">عرض التفاصيل</button>
+                        <div id="quality-details" class="course-details">
+                            <p>المدة: 8 ساعات</p>
+                            <p>السعر: 250 ريال</p>
+                            <a href="#register">سجل الآن</a>
+                        </div>
+                    </div>
+                    <div class="course-card">
+                        <h3>الخرسانة سابقة الإجهاد</h3>
+                        <button onclick="toggleCourse('prestressed')">عرض التفاصيل</button>
+                        <div id="prestressed-details" class="course-details">
+                            <p>المدة: 12 ساعة</p>
+                            <p>السعر: 400 ريال</p>
+                            <a href="#register">سجل الآن</a>
+                        </div>
+                    </div>
                 </div>
-                <div class="article-card">
-                    <h3>الخرسانة الخضراء: المستقبل المستدام</h3>
-                    <p>كيف تقلل البصمة الكربونية باستخدام مواد صديقة للبيئة.</p>
-                    <a href="#">اقرأ المزيد →</a>
-                </div>
+            </div>
+        </section>
+
+        <!-- اتصل بنا -->
+        <section id="contact">
+            <div class="contact-form">
+                <h2>📩 اتصل بنا</h2>
+                <form id="contactForm">
+                    <label for="name">الاسم:</label>
+                    <input type="text" id="name" required>
+
+                    <label for="email">البريد الإلكتروني:</label>
+                    <input type="email" id="email" required>
+
+                    <label for="message">الرسالة:</label>
+                    <textarea id="message" rows="5" required></textarea>
+
+                    <button type="submit">إرسال الرسالة</button>
+                </form>
             </div>
         </section>
     </div>
@@ -234,6 +278,36 @@
                 <p>عدد أكياس الإسمنت (تقريبي): <strong>${cement} كيس (50 كجم/كيس)</strong></p>
             `;
         }
+
+        // دالة عرض/إخفاء تفاصيل الدورة
+        function toggleCourse(courseId) {
+            const details = document.getElementById(`${courseId}-details`);
+            details.style.display = details.style.display === 'none' ? 'block' : 'none';
+        }
+
+        // دالة إرسال نموذج الاتصال
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('تم استلام رسالتك بنجاح! سنتواصل معك قريباً.');
+            this.reset();
+        });
+
+        // تنشيط القوائم
+        document.querySelectorAll('nav a').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href').substring(1);
+                document.querySelectorAll('section').forEach(section => {
+                    section.style.display = 'none';
+                });
+                document.getElementById(targetId).style.display = 'block';
+            });
+        });
+
+        // عرض الصفحة الرئيسية عند التحميل
+        window.onload = function() {
+            document.getElementById('home').style.display = 'block';
+        };
     </script>
 </body>
 </html>
